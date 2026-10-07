@@ -10,19 +10,19 @@ namespace DefikarteBackend.Functions
     public class SimpleCacheTimer
     {
         private readonly ILogger<SimpleCacheTimer> _logger;
-        private readonly IServiceConfiguration _config;
         private readonly ICacheRepository<OsmNode> _cacheRepository;
+        private readonly OverpassClient _overpassClient;
         private readonly IUpdateGeoJsonCacheService _updateGeoJsonCacheService;
 
         public SimpleCacheTimer(
             ILogger<SimpleCacheTimer> logger,
-            IServiceConfiguration config,
             ICacheRepository<OsmNode> cacheRepository,
+            OverpassClient overpassClient,
             IUpdateGeoJsonCacheService updateGeoJsonCacheService)
         {
             _logger = logger;
-            _config = config;
             _cacheRepository = cacheRepository;
+            _overpassClient = overpassClient;
             _updateGeoJsonCacheService = updateGeoJsonCacheService;
         }
 
@@ -38,12 +38,9 @@ namespace DefikarteBackend.Functions
                 _logger.LogError(ex, $"Exception occurred while tried to CleanupOldItemsInLocalCacheAsync. Continue update cache in {nameof(SimpleCacheTimer)}.");
             }
 
-            var overpassApiUrl = _config.OverpassApiUrl;
-            var overpassApiClient = new OverpassClient(overpassApiUrl);
-
             try
             {
-                var response = await overpassApiClient.GetAllDefibrillatorsInSwitzerland();
+                var response = await _overpassClient.GetAllDefibrillatorsInSwitzerland();
                 var cacheV1Task = _cacheRepository.TryUpdateCacheAsync(response);
                 var cacheV2Task = _updateGeoJsonCacheService.TryUpdateAndCombineCacheAsync(GeoJsonConverter.Convert2GeoJson(response));
 

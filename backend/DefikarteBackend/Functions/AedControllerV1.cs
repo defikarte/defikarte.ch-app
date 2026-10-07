@@ -26,17 +26,20 @@ namespace DefikarteBackend.Functions
         private readonly IServiceConfiguration _config;
         private readonly ICacheRepository<OsmNode> _cacheRepository;
         private readonly IGeofenceService _localisationService;
+        private readonly OverpassClient _overpassClient;
         private readonly ILogger<AedControllerV1> _logger;
 
         public AedControllerV1(
             IServiceConfiguration config,
             ICacheRepository<OsmNode> cacheRepository,
             IGeofenceService localisationService,
+            OverpassClient overpassClient,
             ILogger<AedControllerV1> logger)
         {
             _config = config;
             _cacheRepository = cacheRepository;
             _localisationService = localisationService;
+            _overpassClient = overpassClient;
             _logger = logger;
         }
 
@@ -64,8 +67,7 @@ namespace DefikarteBackend.Functions
                 var overpassApiUrl = _config.OverpassApiUrl;
                 _logger.LogInformation($"Get all AED from {overpassApiUrl}. Cache is not available.");
 
-                var overpassApiClient = new OverpassClient(overpassApiUrl);
-                var overpassResponse = await overpassApiClient.GetAllDefibrillatorsInSwitzerland();
+                var overpassResponse = await _overpassClient.GetAllDefibrillatorsInSwitzerland();
                 return new OkObjectResult(overpassResponse);
             }
             catch (Exception ex)

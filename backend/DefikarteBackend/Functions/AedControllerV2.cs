@@ -26,17 +26,20 @@ namespace DefikarteBackend.Functions
         private readonly IServiceConfiguration _config;
         private readonly IGeoJsonCacheRepository _cacheRepository;
         private readonly IGeofenceService _localisationService;
+        private readonly OverpassClient _overpassClient;
         private readonly ILogger<DefibrillatorFunctionV2> _logger;
 
         public DefibrillatorFunctionV2(
             IServiceConfiguration config,
             IGeoJsonCacheRepository cacheRepository,
             IGeofenceService localisationService,
+            OverpassClient overpassClient,
             ILogger<DefibrillatorFunctionV2> logger)
         {
             _config = config;
             _cacheRepository = cacheRepository;
             _localisationService = localisationService;
+            _overpassClient = overpassClient;
             _logger = logger;
         }
 
@@ -69,8 +72,7 @@ namespace DefikarteBackend.Functions
                 var overpassApiUrl = _config.OverpassApiUrl;
                 _logger.LogWarning($"Get all AED from {overpassApiUrl}. Cache is not available.");
 
-                var overpassApiClient = new OverpassClient(overpassApiUrl);
-                var overpassResponse = await overpassApiClient.GetAllDefibrillatorsInSwitzerland();
+                var overpassResponse = await _overpassClient.GetAllDefibrillatorsInSwitzerland();
                 var geojsonResponse = GeoJsonConverter.Convert2GeoJson(overpassResponse);
                 return new OkObjectResult(geojsonResponse);
             }

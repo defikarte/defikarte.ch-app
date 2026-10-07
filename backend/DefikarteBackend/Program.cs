@@ -3,6 +3,7 @@ using DefikarteBackend.Cache;
 using DefikarteBackend.Configuration;
 using DefikarteBackend.Interfaces;
 using DefikarteBackend.Model;
+using DefikarteBackend.OsmOverpassApi;
 using DefikarteBackend.Repository;
 using DefikarteBackend.Services;
 using DefikarteBackend.Validation;
@@ -82,6 +83,8 @@ internal class Program
                 services.AddTransient<IAddressSearchService, SwisstopoAddressSearchService>();
 
                 services.AddSingleton<IGeofenceService, GeofenceService>();
+                services.AddSingleton<OverpassClient>();
+
                 RegisterNtsGeometryServices(services);
             })
             .Build();
