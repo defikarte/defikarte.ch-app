@@ -6,10 +6,10 @@ namespace DefikarteBackend.Model
     public class OsmNode
     {
         [JsonProperty("type")]
-        public string Type { get; set; }
+        public string Type { get; set; } = string.Empty;
 
         [JsonProperty("id")]
-        public string Id { get; set; }  
+        public string Id { get; set; } = string.Empty;
 
         [JsonProperty("lat")]
         public double Lat { get; set; }
@@ -18,6 +18,6 @@ namespace DefikarteBackend.Model
         public double Lon { get; set; }
 
         [JsonProperty("tags")]
-        public Dictionary<string, string> Tags { get; set; }
+        public Dictionary<string, string> Tags { get; set; } = new();
     }
 }
