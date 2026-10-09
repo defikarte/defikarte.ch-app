@@ -7,7 +7,7 @@ namespace DefikarteBackend.Interfaces
     {
         Task<IList<T>> GetAsync();
 
-        Task<T> GetByIdAsync(string id);
+        Task<T?> GetByIdAsync(string id);
 
         Task<bool> TryUpdateCacheAsync(IList<T> values);
     }

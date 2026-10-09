@@ -39,7 +39,7 @@ namespace DefikarteBackend.Services
                     return false;
                 }
 
-                FeatureCollection geometry;
+                FeatureCollection? geometry;
                 var serializer = GeoJsonSerializer.Create();
                 using (var stringReader = new StringReader(geoJson))
                 using (var jsonReader = new JsonTextReader(stringReader))
@@ -49,9 +49,9 @@ namespace DefikarteBackend.Services
 
                 var point = _geometryFactory.CreatePoint(new Coordinate(longitude, latitude));
 
-                foreach (var geom in geometry)
+                foreach (var geom in geometry ?? new FeatureCollection())
                 {
-                    if (geom.Geometry.Contains(point))
+                    if (geom.Geometry?.Contains(point) == true)
                     {
                         return true;
                     }

@@ -20,7 +20,7 @@ namespace DefikarteBackend.Validation
             // opening hours validation is missing
         }
 
-        private static void PhoneNumberValid(string phoneNumberRaw, ValidationContext<DefibrillatorRequestV2> context)
+        private static void PhoneNumberValid(string? phoneNumberRaw, ValidationContext<DefibrillatorRequestV2> context)
         {
             if (string.IsNullOrEmpty(phoneNumberRaw))
             {
@@ -54,7 +54,7 @@ namespace DefikarteBackend.Validation
             }
         }
 
-        private static void AccessValid(string access, ValidationContext<DefibrillatorRequestV2> context)
+        private static void AccessValid(string? access, ValidationContext<DefibrillatorRequestV2> context)
         {
             if (string.IsNullOrEmpty(access))
             {
@@ -67,7 +67,7 @@ namespace DefikarteBackend.Validation
             }
         }
 
-        private static void IndoorValid(string indoor, ValidationContext<DefibrillatorRequestV2> context)
+        private static void IndoorValid(string? indoor, ValidationContext<DefibrillatorRequestV2> context)
         {
             if (string.IsNullOrEmpty(indoor))
             {
@@ -80,7 +80,7 @@ namespace DefikarteBackend.Validation
             }
         }
 
-        private static void IsNumber(string value, ValidationContext<DefibrillatorRequestV2> context)
+        private static void IsNumber(string? value, ValidationContext<DefibrillatorRequestV2> context)
         {
             if (string.IsNullOrEmpty(value))
             {

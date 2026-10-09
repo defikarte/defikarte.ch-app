@@ -13,7 +13,7 @@ namespace DefikarteBackend.Model
 
         public int Type { get; set; }
 
-        public Dictionary<string, string> Tags { get; set; }
+        public Dictionary<string, string> Tags { get; set; } = new();
 
         public int ChangeSetId { get; set; }
 
@@ -25,6 +25,6 @@ namespace DefikarteBackend.Model
 
         public int UserId { get; set; }
 
-        public string UserName { get; set; }
+        public string UserName { get; set; } = string.Empty;
     }
 }

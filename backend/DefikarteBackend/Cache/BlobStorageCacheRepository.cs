@@ -21,10 +21,10 @@ namespace DefikarteBackend.Cache
         public async Task<IList<OsmNode>> GetAsync()
         {
             var content = await ReadAsync(_blobName);
-            return JsonConvert.DeserializeObject<List<OsmNode>>(content);
+            return JsonConvert.DeserializeObject<List<OsmNode>>(content) ?? new List<OsmNode>();
         }
 
-        public async Task<OsmNode> GetByIdAsync(string id)
+        public async Task<OsmNode?> GetByIdAsync(string id)
         {
             return (await GetAsync()).FirstOrDefault(x => x.Id == id);
         }
