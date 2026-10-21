@@ -1,3 +1,9 @@
+# Important: Code was migrated to [defikarte/defikarte.ch](https://github.com/defikarte/defikarte.ch)
+
+This repository is archived. It holds the mobile app and backend of defikarte.ch as they were until October 2026. Development now continues at defikarte/defikarte.ch.
+
+
+
 [![Build iOS & Android](https://github.com/chnuessli/defikarte.ch-app/actions/workflows/app-deployment.yml/badge.svg)](https://github.com/chnuessli/defikarte.ch-app/actions/workflows/app-deployment.yml)
 ![Defikarte-Backend](https://github.com/chnuessli/defikarte.ch-app/workflows/Defikarte-Backend/badge.svg?branch=main)
 
